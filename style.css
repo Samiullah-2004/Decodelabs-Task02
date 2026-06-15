@@ -1,0 +1,1192 @@
+/*
+ * ============================================================
+ *  Art of Fluidity — style.css
+ *  Strategy: Mobile-first, pure CSS3, Flexbox layout engine
+ *  Breakpoints: 480px | 768px | 1024px
+ * ============================================================
+ */
+
+
+/* ============================================================
+   0. DESIGN TOKENS (CSS Custom Properties)
+   - Single source of truth for all colors, type, spacing
+============================================================ */
+:root {
+  /* — Color palette — */
+  --clr-bg:           #0D0D1A;   /* Deep indigo background         */
+  --clr-surface:      #1A1A30;   /* Slightly lifted surface        */
+  --clr-surface-alt:  #131325;   /* Alt card / section background  */
+  --clr-border:       #2A2A45;   /* Subtle divider / border        */
+  --clr-text:         #F0EDE6;   /* Warm off-white body text       */
+  --clr-text-muted:   #8A879E;   /* Muted / secondary text         */
+  --clr-teal:         #4ECDC4;   /* Liquid teal — primary accent   */
+  --clr-violet:       #A78BFA;   /* Iridescent violet — accent 2   */
+  --clr-teal-dim:     rgba(78, 205, 196, 0.12); /* Teal glow wash */
+
+  /* — Typography — */
+  --font-display: 'Cormorant Garant', Georgia, serif;
+  --font-body:    'DM Sans', system-ui, sans-serif;
+
+  /* — Type scale (fluid via clamp) — */
+  --fs-xs:    0.75rem;    /* 12px */
+  --fs-sm:    0.875rem;   /* 14px */
+  --fs-base:  1rem;       /* 16px */
+  --fs-md:    1.125rem;   /* 18px */
+  --fs-lg:    1.375rem;   /* 22px */
+  --fs-xl:    clamp(1.75rem, 4vw, 2.75rem);
+  --fs-2xl:   clamp(2.5rem,  7vw, 5rem);
+  --fs-3xl:   clamp(3rem,    9vw, 7rem);
+
+  /* — Spacing scale (rem-based) — */
+  --space-2:   0.125rem;
+  --space-4:   0.25rem;
+  --space-8:   0.5rem;
+  --space-12:  0.75rem;
+  --space-16:  1rem;
+  --space-24:  1.5rem;
+  --space-32:  2rem;
+  --space-48:  3rem;
+  --space-64:  4rem;
+  --space-96:  6rem;
+  --space-128: 8rem;
+
+  /* — Animation — */
+  --ease-fluid: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --transition-base: 0.3s var(--ease-fluid);
+}
+
+
+/* ============================================================
+   1. RESET & BASE
+============================================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Prevent font inflation on mobile */
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--clr-bg);
+  color: var(--clr-text);
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  font-weight: 300;
+  line-height: 1.7;
+  /* Prevent horizontal scroll on narrow viewports */
+  overflow-x: hidden;
+}
+
+/* Responsive images — never overflow containers */
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Links inherit color by default */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Remove default list styles */
+ul, ol {
+  list-style: none;
+}
+
+/* Focus ring — visible and accessible */
+:focus-visible {
+  outline: 2px solid var(--clr-teal);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+
+/* ============================================================
+   2. TYPOGRAPHY UTILITIES
+============================================================ */
+
+/* Section eyebrow label */
+.section-eyebrow {
+  font-family: var(--font-body);
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--clr-teal);
+  margin-bottom: var(--space-16);
+}
+
+/* Section heading (shared style) */
+.section-heading {
+  font-family: var(--font-display);
+  font-size: var(--fs-xl);
+  font-weight: 300;
+  line-height: 1.15;
+  color: var(--clr-text);
+}
+
+
+/* ============================================================
+   3. BUTTONS
+============================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-8);
+  padding: var(--space-12) var(--space-32);
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background-color var(--transition-base),
+              color var(--transition-base),
+              border-color var(--transition-base),
+              box-shadow var(--transition-base);
+  white-space: nowrap;
+}
+
+/* Primary — filled teal */
+.btn--primary {
+  background-color: var(--clr-teal);
+  color: var(--clr-bg);
+  border: 1px solid var(--clr-teal);
+}
+.btn--primary:hover,
+.btn--primary:focus-visible {
+  background-color: #3db8b0;
+  border-color: #3db8b0;
+  box-shadow: 0 0 24px rgba(78, 205, 196, 0.35);
+}
+
+/* Ghost — transparent with teal border */
+.btn--ghost {
+  background-color: transparent;
+  color: var(--clr-teal);
+  border: 1px solid var(--clr-teal);
+}
+.btn--ghost:hover,
+.btn--ghost:focus-visible {
+  background-color: var(--clr-teal-dim);
+}
+
+/* Outline — dim border, text color */
+.btn--outline {
+  background-color: transparent;
+  color: var(--clr-text-muted);
+  border: 1px solid var(--clr-border);
+}
+.btn--outline:hover,
+.btn--outline:focus-visible {
+  color: var(--clr-text);
+  border-color: var(--clr-text-muted);
+}
+
+
+/* ============================================================
+   4. SECTION WRAPPER (shared padding / max-width)
+============================================================ */
+.section {
+  padding-block: var(--space-64);
+}
+
+.section-inner {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: var(--space-24);
+}
+
+.section-header {
+  margin-bottom: var(--space-48);
+}
+
+.section-footer {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-48);
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding-block: var(--space-96);
+  }
+}
+
+@media (min-width: 1024px) {
+  .section {
+    padding-block: var(--space-128);
+  }
+  .section-inner {
+    padding-inline: var(--space-48);
+  }
+}
+
+
+/* ============================================================
+   5. HEADER & NAVIGATION
+   Mobile: logo left, hamburger right; nav hidden until toggled
+   Desktop (768px+): all inline, no toggle
+============================================================ */
+
+/* — Fixed header bar — */
+.site-header {
+  position: fixed;
+  inset-block-start: 0;
+  inset-inline: 0;
+  z-index: 100;
+  background-color: rgba(13, 13, 26, 0.85);
+  /* Frosted glass effect where supported */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--clr-border);
+}
+
+/* — Inner flex row — */
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* Wrap allows nav to drop below on very narrow screens if needed */
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: var(--space-24);
+  height: 64px;
+  gap: var(--space-16);
+}
+
+/* — Logo — */
+.logo {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  line-height: 1;
+  transition: opacity var(--transition-base);
+}
+.logo:hover { opacity: 0.7; }
+
+.logo-main {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: var(--clr-text);
+}
+
+.logo-sub {
+  font-family: var(--font-body);
+  font-size: var(--fs-xs);
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--clr-teal);
+}
+
+/* — Hamburger button (visible on mobile only) — */
+.nav-toggle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  padding: var(--space-4);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  /* Smooth bar transform for X state */
+  position: relative;
+  z-index: 101;
+}
+
+.hamburger-bar {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background-color: var(--clr-text);
+  border-radius: 1px;
+  transform-origin: center;
+  transition: transform var(--transition-base),
+              opacity var(--transition-base);
+}
+
+/* Transform bars into × when nav is open */
+.nav-toggle[aria-expanded="true"] .hamburger-bar:nth-child(1) {
+  transform: translateY(6.5px) rotate(45deg);
+}
+.nav-toggle[aria-expanded="true"] .hamburger-bar:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+.nav-toggle[aria-expanded="true"] .hamburger-bar:nth-child(3) {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
+
+/* — Primary nav — Mobile: full-width dropdown, hidden by default — */
+.primary-nav {
+  display: none; /* hidden until toggled */
+  width: 100%;
+  order: 3; /* push below logo + toggle */
+  padding-block: var(--space-16);
+  border-top: 1px solid var(--clr-border);
+}
+
+.primary-nav.is-open {
+  display: block;
+}
+
+.nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.nav-link {
+  display: block;
+  padding-block: var(--space-12);
+  font-size: var(--fs-sm);
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: var(--clr-text-muted);
+  transition: color var(--transition-base);
+}
+.nav-link:hover,
+.nav-link:focus-visible {
+  color: var(--clr-text);
+}
+
+/* CTA nav link */
+.nav-link--cta {
+  color: var(--clr-teal);
+}
+.nav-link--cta:hover { color: #3db8b0; }
+
+/* — 768px+: Inline nav, hide hamburger — */
+@media (min-width: 768px) {
+
+  .nav-toggle {
+    display: none; /* hamburger gone on desktop */
+  }
+
+  .primary-nav {
+    display: flex !important; /* always visible */
+    align-items: center;
+    width: auto;
+    order: 0;
+    padding-block: 0;
+    border-top: none;
+  }
+
+  .nav-list {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-32);
+  }
+
+  .nav-link {
+    padding-block: var(--space-4);
+    position: relative;
+  }
+
+  /* Animated underline on hover */
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    bottom: -2px;
+    height: 1px;
+    background-color: var(--clr-teal);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--transition-base);
+  }
+  .nav-link:hover::after,
+  .nav-link:focus-visible::after {
+    transform: scaleX(1);
+  }
+  .nav-link--cta::after { display: none; }
+}
+
+
+/* ============================================================
+   6. HERO SECTION
+   Mobile:  stacked — text, then image
+   1024px+: side-by-side with asymmetric proportions
+============================================================ */
+.hero {
+  /* Push content below fixed header */
+  padding-top: calc(64px + var(--space-64));
+  padding-bottom: var(--space-64);
+  padding-inline: var(--space-24);
+  max-width: 1200px;
+  margin-inline: auto;
+
+  /* Mobile: column stack */
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-48);
+}
+
+/* — Hero text column — */
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-24);
+}
+
+.hero-eyebrow {
+  font-family: var(--font-body);
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--clr-teal);
+}
+
+/* — SIGNATURE ELEMENT: The fluid headline —
+   The em italic receives a slow-shifting iridescent gradient underline
+   that mimics light refracting off a moving water surface.
+   This is the one bold aesthetic risk.
+------------------------------------------------ */
+.hero-heading {
+  font-family: var(--font-display);
+  font-size: var(--fs-3xl);
+  font-weight: 300;
+  line-height: 1.08;
+  color: var(--clr-text);
+}
+
+.hero-heading em {
+  font-style: italic;
+  font-weight: 300;
+  color: transparent;
+  background: linear-gradient(
+    90deg,
+    var(--clr-teal)   0%,
+    var(--clr-violet) 50%,
+    var(--clr-teal)   100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: fluidShift 6s ease-in-out infinite;
+}
+
+@keyframes fluidShift {
+  0%   { background-position: 0%   50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0%   50%; }
+}
+
+.hero-body {
+  font-size: var(--fs-md);
+  color: var(--clr-text-muted);
+  max-width: 44ch;
+  line-height: 1.75;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-16);
+  margin-top: var(--space-8);
+}
+
+/* — Hero image column — */
+.hero-visual {
+  width: 100%;
+}
+
+.hero-image-frame {
+  position: relative;
+  /* Maintain a tall portrait crop on mobile */
+  max-height: 70vw;
+  overflow: hidden;
+  border-radius: 2px;
+}
+
+.hero-image-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+}
+
+/* Iridescent gradient overlay on image */
+.hero-image-accent {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(78, 205, 196, 0.15) 0%,
+    transparent 50%,
+    rgba(167, 139, 250, 0.1) 100%
+  );
+  pointer-events: none;
+}
+
+/* — 768px: Hero layout adjustments — */
+@media (min-width: 768px) {
+  .hero {
+    padding-top: calc(64px + var(--space-96));
+    padding-bottom: var(--space-96);
+  }
+
+  .hero-image-frame {
+    max-height: 55vw;
+  }
+}
+
+/* — 1024px: Side-by-side asymmetric layout — */
+@media (min-width: 1024px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    padding-top: calc(64px + var(--space-96));
+    padding-bottom: var(--space-96);
+    gap: var(--space-64);
+    min-height: 100vh;
+  }
+
+  .hero-content {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+
+  .hero-visual {
+    flex: 1 1 auto;
+    align-self: stretch;
+  }
+
+  .hero-image-frame {
+    height: 85%;
+    max-height: none;
+    /* Vertically centered within the column */
+    position: sticky;
+    top: 80px;
+  }
+
+  .hero-image-frame img {
+    height: 100%;
+    min-height: 500px;
+  }
+}
+
+
+/* ============================================================
+   7. STATS STRIP
+============================================================ */
+.stats-strip {
+  background-color: var(--clr-surface);
+  border-block: 1px solid var(--clr-border);
+  padding-block: var(--space-48);
+  padding-inline: var(--space-24);
+}
+
+.stats-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-48) var(--space-64);
+  max-width: 1200px;
+  margin-inline: auto;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-8);
+  /* Each stat takes up at least ~40% on mobile, ~20% on desktop */
+  flex: 1 1 40%;
+  max-width: 200px;
+}
+
+.stat-number {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 300;
+  color: var(--clr-teal);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--clr-text-muted);
+}
+
+@media (min-width: 768px) {
+  .stat-item {
+    flex: 1 1 20%;
+  }
+}
+
+
+/* ============================================================
+   8. WORKS GRID
+   Mobile:  single column
+   480px:   2 columns (small cards)
+   768px:   featured card left (spans 2 rows), 2-col right
+   1024px:  wider proportions
+============================================================ */
+.works {
+  background-color: var(--clr-bg);
+}
+
+.works-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}
+
+/* — Work card — */
+.work-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 2px;
+  background-color: var(--clr-surface);
+}
+
+.work-card__image-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.work-card__image-wrap img {
+  width: 100%;
+  /* Aspect-ratio via object-fit */
+  height: 280px;
+  object-fit: cover;
+  transition: transform 0.7s var(--ease-fluid);
+}
+
+/* Image scale-up on hover */
+.work-card:hover .work-card__image-wrap img {
+  transform: scale(1.04);
+}
+
+/* — Overlay text on card — */
+.work-card__overlay {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  padding: var(--space-24);
+  background: linear-gradient(
+    to top,
+    rgba(13, 13, 26, 0.95) 0%,
+    rgba(13, 13, 26, 0.5)  60%,
+    transparent 100%
+  );
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.work-card__tag {
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--clr-teal);
+}
+
+.work-card__title {
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  font-weight: 400;
+  color: var(--clr-text);
+  line-height: 1.2;
+}
+
+/* — 480px: 2-column grid for smaller cards — */
+@media (min-width: 480px) {
+  .works-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    gap: var(--space-16);
+  }
+
+  /* Featured card spans full width on this bp */
+  .work-card--featured {
+    grid-column: 1 / -1;
+  }
+
+  .work-card__image-wrap img {
+    height: 260px;
+  }
+
+  .work-card--featured .work-card__image-wrap img {
+    height: 380px;
+  }
+}
+
+/* — 768px: Featured card spans 2 rows on left — */
+@media (min-width: 768px) {
+  .works-grid {
+    grid-template-columns: 1.3fr 1fr 1fr;
+    grid-template-rows: auto auto;
+  }
+
+  .work-card--featured {
+    grid-column: 1;
+    grid-row: 1 / 3;
+  }
+
+  .work-card--featured .work-card__image-wrap img {
+    height: 100%;
+    min-height: 520px;
+    max-height: 640px;
+  }
+
+  .work-card__image-wrap img {
+    height: 240px;
+  }
+}
+
+/* — 1024px: Tighten the grid — */
+@media (min-width: 1024px) {
+  .work-card__image-wrap img {
+    height: 280px;
+  }
+}
+
+
+/* ============================================================
+   9. PROCESS SECTION
+   Mobile: stacked column
+   1024px: side-by-side (text left, images right)
+============================================================ */
+.process {
+  background-color: var(--clr-surface-alt);
+}
+
+.process-layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-48);
+}
+
+/* — Text column — */
+.process-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-24);
+}
+
+.process-body {
+  color: var(--clr-text-muted);
+  font-size: var(--fs-md);
+  line-height: 1.8;
+  max-width: 52ch;
+}
+
+/* — Visual column — stacked images — */
+.process-visual {
+  width: 100%;
+}
+
+.process-image-stack {
+  position: relative;
+  /* Reserve height for the stack on mobile */
+  min-height: 320px;
+}
+
+.process-img {
+  border-radius: 2px;
+  object-fit: cover;
+}
+
+/* Back image: full width */
+.process-img--back {
+  width: 100%;
+  height: 320px;
+}
+
+/* Front image: smaller, offset to the bottom-left corner */
+.process-img--front {
+  display: none; /* hidden on mobile to avoid clutter */
+}
+
+/* — 1024px: Side-by-side layout + reveal front image — */
+@media (min-width: 1024px) {
+  .process-layout {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: var(--space-96);
+  }
+
+  .process-text {
+    flex: 0 0 45%;
+    max-width: 45%;
+    padding-top: var(--space-32);
+  }
+
+  .process-visual {
+    flex: 1 1 auto;
+  }
+
+  .process-image-stack {
+    min-height: 560px;
+  }
+
+  .process-img--back {
+    width: 88%;
+    height: 560px;
+    margin-left: auto;
+  }
+
+  /* Front image: absolutely positioned, overlapping bottom-left */
+  .process-img--front {
+    display: block;
+    position: absolute;
+    bottom: -var(--space-32);
+    left: 0;
+    width: 55%;
+    height: 320px;
+    border: 4px solid var(--clr-surface-alt);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  }
+}
+
+
+/* ============================================================
+   10. PHILOSOPHY — FULL-BLEED QUOTE
+============================================================ */
+.philosophy {
+  background-color: var(--clr-bg);
+  border-block: 1px solid var(--clr-border);
+  /* Faint teal noise texture via pseudo-element */
+  position: relative;
+  overflow: hidden;
+}
+
+/* Ambient glow behind quote */
+.philosophy::before {
+  content: '';
+  position: absolute;
+  inset-inline: 10%;
+  inset-block: -20%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(78, 205, 196, 0.07) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.philosophy-inner {
+  position: relative;
+  max-width: 900px;
+  margin-inline: auto;
+  padding-inline: var(--space-24);
+  padding-block: var(--space-96);
+  text-align: center;
+}
+
+.philosophy-quote {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3.5vw, 2.5rem);
+  font-weight: 300;
+  line-height: 1.55;
+  color: var(--clr-text);
+  letter-spacing: 0.01em;
+}
+
+.philosophy-quote em {
+  color: var(--clr-teal);
+  font-style: italic;
+}
+
+.quote-attribution {
+  display: block;
+  margin-top: var(--space-32);
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: var(--clr-text-muted);
+}
+
+
+/* ============================================================
+   11. EXHIBITION LIST
+============================================================ */
+.exhibitions {
+  background-color: var(--clr-surface-alt);
+}
+
+.exhibition-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-top: 1px solid var(--clr-border);
+}
+
+.exhibition-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  padding-block: var(--space-24);
+  border-bottom: 1px solid var(--clr-border);
+  transition: background-color var(--transition-base);
+}
+.exhibition-item:hover {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+/* — Current show gets a highlight strip — */
+.exhibition-item--current {
+  position: relative;
+  padding-left: var(--space-24);
+}
+.exhibition-item--current::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block: 0;
+  width: 2px;
+  background-color: var(--clr-teal);
+}
+
+.ex-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-16);
+}
+
+.ex-year {
+  font-family: var(--font-body);
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: var(--clr-text-muted);
+  min-width: 3rem;
+}
+
+.ex-status {
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: var(--space-2) var(--space-8);
+  border-radius: 1px;
+}
+
+.ex-status--live {
+  color: var(--clr-teal);
+  background-color: var(--clr-teal-dim);
+  border: 1px solid rgba(78, 205, 196, 0.25);
+}
+
+.ex-title {
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  font-weight: 400;
+  color: var(--clr-text);
+  line-height: 1.2;
+}
+
+.ex-venue {
+  font-size: var(--fs-sm);
+  color: var(--clr-text-muted);
+}
+
+/* — 768px: Row layout for exhibition items — */
+@media (min-width: 768px) {
+  .exhibition-item {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-32);
+  }
+
+  .ex-meta {
+    flex: 0 0 120px;
+  }
+
+  .ex-detail {
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-32);
+  }
+
+  .ex-venue {
+    text-align: right;
+    flex-shrink: 0;
+  }
+}
+
+
+/* ============================================================
+   12. CONTACT SECTION
+============================================================ */
+.contact {
+  background-color: var(--clr-bg);
+  padding-block: var(--space-96);
+  padding-inline: var(--space-24);
+}
+
+.contact-inner {
+  max-width: 1200px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-48);
+}
+
+.contact-heading {
+  font-family: var(--font-display);
+  font-size: var(--fs-2xl);
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--clr-text);
+  margin-top: var(--space-16);
+}
+
+.contact-body {
+  font-size: var(--fs-md);
+  color: var(--clr-text-muted);
+  max-width: 44ch;
+  line-height: 1.75;
+  margin-top: var(--space-16);
+}
+
+/* — Contact link rows — */
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-top: 1px solid var(--clr-border);
+}
+
+.contact-link {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding-block: var(--space-24);
+  border-bottom: 1px solid var(--clr-border);
+  transition: color var(--transition-base);
+}
+.contact-link:hover .contact-link__value {
+  color: var(--clr-teal);
+}
+
+.contact-link__label {
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--clr-text-muted);
+}
+
+.contact-link__value {
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  font-weight: 300;
+  color: var(--clr-text);
+  transition: color var(--transition-base);
+}
+
+/* — 1024px: Contact side-by-side — */
+@media (min-width: 1024px) {
+  .contact-inner {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: var(--space-96);
+  }
+
+  .contact-text {
+    flex: 0 0 40%;
+    max-width: 40%;
+  }
+
+  .contact-links {
+    flex: 1 1 auto;
+    align-self: flex-start;
+    padding-top: var(--space-48);
+  }
+}
+
+
+/* ============================================================
+   13. SITE FOOTER
+============================================================ */
+.site-footer {
+  background-color: var(--clr-surface);
+  border-top: 1px solid var(--clr-border);
+  padding-block: var(--space-32);
+  padding-inline: var(--space-24);
+}
+
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-16);
+  max-width: 1200px;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.footer-copy {
+  font-size: var(--fs-xs);
+  color: var(--clr-text-muted);
+  letter-spacing: 0.06em;
+}
+
+.footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-24);
+}
+
+.footer-link {
+  font-size: var(--fs-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--clr-text-muted);
+  transition: color var(--transition-base);
+}
+.footer-link:hover { color: var(--clr-text); }
+
+@media (min-width: 768px) {
+  .footer-inner {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+}

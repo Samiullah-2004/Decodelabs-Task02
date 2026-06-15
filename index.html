@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Samiullah Akram — Frontend Web Developer portfolio. Building responsive, fluid web applications.">
+  <title>Samiullah Akram — Frontend Developer</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+
+      <a href="#" class="logo" aria-label="Samiullah Akram — Home">
+        <span class="logo-main">Samiullah Akram</span>
+        <span class="logo-sub">Frontend Developer</span>
+      </a>
+
+      <button
+        class="nav-toggle"
+        id="navToggle"
+        aria-controls="primaryNav"
+        aria-expanded="false"
+        aria-label="Open navigation menu"
+      >
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+      </button>
+
+      <nav class="primary-nav" id="primaryNav" aria-label="Primary navigation">
+        <ul class="nav-list">
+          <li><a href="#works"     class="nav-link">Projects</a></li>
+          <li><a href="#process"   class="nav-link">Process</a></li>
+          <li><a href="#philosophy" class="nav-link">Philosophy</a></li>
+          <li><a href="#contact"   class="nav-link nav-link--cta">Network</a></li>
+        </ul>
+      </nav>
+
+    </div></header>
+
+
+  <main>
+
+    <section class="hero" aria-labelledby="heroHeading">
+
+      <div class="hero-content">
+        <p class="hero-eyebrow">Frontend Web Developer</p>
+        <h1 class="hero-heading" id="heroHeading">
+          Interfaces<br>
+          <em>engineered</em><br>
+          for fluidity.
+        </h1>
+        <p class="hero-body">
+          Building responsive web applications, managing complex state, and engineering clean user experiences. Based in Lahore, Pakistan.
+        </p>
+        <div class="hero-actions">
+          <a href="#works" class="btn btn--primary">View Projects</a>
+          <a href="#process" class="btn btn--ghost">See Process</a>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-hidden="true">
+        <div class="hero-image-frame">
+          <img
+            src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=900&auto=format&fit=crop&q=80"
+            alt="A clean coding environment with a laptop displaying code"
+            width="900"
+            height="1100"
+            loading="eager"
+          >
+          <div class="hero-image-accent"></div>
+        </div>
+      </div>
+
+    </section><section class="stats-strip" aria-label="Core Stack Highlights">
+      <ul class="stats-list">
+        <li class="stat-item">
+          <span class="stat-number">React.js</span>
+          <span class="stat-label">Component Architecture</span>
+        </li>
+        <li class="stat-item">
+          <span class="stat-number">Redux</span>
+          <span class="stat-label">State Management</span>
+        </li>
+        <li class="stat-item">
+          <span class="stat-number">Tailwind</span>
+          <span class="stat-label">Responsive Styling</span>
+        </li>
+        <li class="stat-item">
+          <span class="stat-number">Node.js</span>
+          <span class="stat-label">Backend Foundation</span>
+        </li>
+      </ul>
+    </section><section class="section works" id="works" aria-labelledby="worksHeading">
+      <div class="section-inner">
+
+        <header class="section-header">
+          <p class="section-eyebrow">Selected Projects</p>
+          <h2 class="section-heading" id="worksHeading">
+            Logic translated<br>to layout.
+          </h2>
+        </header>
+
+        <div class="works-grid">
+
+          <article class="work-card work-card--featured">
+            <a href="https://paste-app-pied-iota.vercel.app/" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">
+              <div class="work-card__image-wrap">
+                <img
+                  src="https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?w=800&auto=format&fit=crop&q=80"
+                  alt="Code snippet placeholder representing the Paste App"
+                  width="800"
+                  height="1000"
+                  loading="lazy"
+                >
+                <div class="work-card__overlay">
+                  <span class="work-card__tag">React.js &middot; Redux Toolkit</span>
+                  <h3 class="work-card__title">Paste App ↗</h3>
+                </div>
+              </div>
+            </a>
+          </article>
+
+          <article class="work-card">
+            <a href="https://samiullah-2004.github.io/Crypto-Price-Tracker/" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">
+              <div class="work-card__image-wrap">
+                <img
+                  src="https://images.unsplash.com/photo-1621416894569-0f39ed31d247?w=600&auto=format&fit=crop&q=80"
+                  alt="Cryptocurrency chart representing the Crypto Tracker"
+                  width="600"
+                  height="750"
+                  loading="lazy"
+                >
+                <div class="work-card__overlay">
+                  <span class="work-card__tag">CoinGecko API &middot; Fintech</span>
+                  <h3 class="work-card__title">Crypto Tracker ↗</h3>
+                </div>
+              </div>
+            </a>
+          </article>
+
+          <article class="work-card">
+            <a href="https://samiullah-2004.github.io/Skycast-Weather-App/" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">
+              <div class="work-card__image-wrap">
+                <img
+                  src="https://images.unsplash.com/photo-1592210454359-9043f067919b?w=600&auto=format&fit=crop&q=80"
+                  alt="Sky and clouds representing the Skycast Weather App"
+                  width="600"
+                  height="750"
+                  loading="lazy"
+                >
+                <div class="work-card__overlay">
+                  <span class="work-card__tag">JavaScript &middot; Open-Meteo API</span>
+                  <h3 class="work-card__title">Skycast Weather ↗</h3>
+                </div>
+              </div>
+            </a>
+          </article>
+
+          <article class="work-card">
+            <div class="work-card__image-wrap">
+              <img
+                src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=600&auto=format&fit=crop&q=80"
+                alt="Security concept representing authentication hub"
+                width="600"
+                height="750"
+                loading="lazy"
+              >
+              <div class="work-card__overlay">
+                <span class="work-card__tag">Node.js &middot; Express &middot; JWT</span>
+                <h3 class="work-card__title">Authentication Hub</h3>
+              </div>
+            </div>
+          </article>
+
+          <article class="work-card">
+            <a href="https://samiullah-portfolio-orpin.vercel.app/" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">
+              <div class="work-card__image-wrap">
+                <img
+                  src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&auto=format&fit=crop&q=80"
+                  alt="A minimalist desk setup representing a main portfolio"
+                  width="600"
+                  height="750"
+                  loading="lazy"
+                >
+                <div class="work-card__overlay">
+                  <span class="work-card__tag">Web Portfolio &middot; Live Deployment</span>
+                  <h3 class="work-card__title">Main Portfolio ↗</h3>
+                </div>
+              </div>
+            </a>
+          </article>
+
+        </div><div class="section-footer">
+          <a href="https://github.com/Samiullah-2004" target="_blank" rel="noopener noreferrer" class="btn btn--outline">View Full GitHub Archive</a>
+        </div>
+
+      </div></section><section class="section process" id="process" aria-labelledby="processHeading">
+      <div class="section-inner">
+
+        <div class="process-layout">
+
+          <div class="process-text">
+            <p class="section-eyebrow">Development Methodology</p>
+            <h2 class="section-heading" id="processHeading">
+              Structure<br>before<br>styling.
+            </h2>
+            <p class="process-body">
+              Every solid application begins with a robust foundation. Before writing dynamic JavaScript or complex Redux logic, I focus on semantic HTML and fluid architecture. Content dictates the layout, ensuring that the interface adapts naturally to any screen size rather than breaking under rigid constraints.
+            </p>
+            <p class="process-body">
+              From utilizing CSS Media Queries for responsive transitions to implementing secure JWT authentication on the backend, my process balances clean user interface design with strong computational logic.
+            </p>
+            <a href="https://github.com/Samiullah-2004" target="_blank" rel="noopener noreferrer" class="btn btn--ghost">Read My Commit History</a>
+          </div>
+
+          <div class="process-visual">
+            <div class="process-image-stack">
+              <img
+                class="process-img process-img--back"
+                src="https://images.unsplash.com/photo-1607706189992-eae578626c86?w=500&auto=format&fit=crop&q=80"
+                alt="A developer's dual monitor setup displaying code"
+                width="500"
+                height="600"
+                loading="lazy"
+              >
+              <img
+                class="process-img process-img--front"
+                src="https://images.unsplash.com/photo-1550439062-609e1531270e?w=400&auto=format&fit=crop&q=80"
+                alt="Close-up of hands typing on a mechanical keyboard"
+                width="400"
+                height="500"
+                loading="lazy"
+              >
+            </div>
+          </div>
+
+        </div></div>
+    </section><section class="philosophy" id="philosophy" aria-labelledby="philosophyQuote">
+      <div class="philosophy-inner">
+        <blockquote class="philosophy-quote" id="philosophyQuote">
+          <p>
+            "Content is like water.<br>
+            You put water into a device, it becomes the device.<br>
+            <em>I just build the container to hold it perfectly.</em>"
+          </p>
+          <footer class="quote-attribution">— The Art of Fluidity (Responsive Web Design)</footer>
+        </blockquote>
+      </div>
+    </section><section class="section exhibitions" aria-labelledby="exhibitionsHeading">
+      <div class="section-inner">
+
+        <header class="section-header">
+          <p class="section-eyebrow">Experience & Education</p>
+          <h2 class="section-heading" id="exhibitionsHeading">Academic &<br>Professional.</h2>
+        </header>
+
+        <ul class="exhibition-list">
+          <li class="exhibition-item exhibition-item--current">
+            <div class="ex-meta">
+              <span class="ex-year">2026</span>
+              <span class="ex-status ex-status--live">Current</span>
+            </div>
+            <div class="ex-detail">
+              <h3 class="ex-title">Frontend Intern</h3>
+              <p class="ex-venue">DecodeLabs</p>
+            </div>
+          </li>
+          <li class="exhibition-item">
+            <div class="ex-meta">
+              <span class="ex-year">2026</span>
+            </div>
+            <div class="ex-detail">
+              <h3 class="ex-title">Web Development Intern</h3>
+              <p class="ex-venue">Qwetrum Technologies</p>
+            </div>
+          </li>
+          <li class="exhibition-item">
+            <div class="ex-meta">
+              <span class="ex-year">2024 - Present</span>
+            </div>
+            <div class="ex-detail">
+              <h3 class="ex-title">BS Computer Science (4th Semester)</h3>
+              <p class="ex-venue">Alhamra University (NCBA&E)</p>
+            </div>
+          </li>
+          <li class="exhibition-item">
+            <div class="ex-meta">
+              <span class="ex-year">2024 - 2025</span>
+            </div>
+            <div class="ex-detail">
+              <h3 class="ex-title">Freelancing & Digital Marketing Courses</h3>
+              <p class="ex-venue">DigiSkills Training Program</p>
+            </div>
+          </li>
+        </ul>
+
+      </div>
+    </section><section class="contact" id="contact" aria-labelledby="contactHeading">
+      <div class="contact-inner">
+        <div class="contact-text">
+          <p class="section-eyebrow">Get in Touch</p>
+          <h2 class="contact-heading" id="contactHeading">
+            Let's build<br>together.
+          </h2>
+          <p class="contact-body">
+            Currently open to freelance opportunities, academic collaborations, and new projects. Based in Lahore, available for remote work globally.
+          </p>
+        </div>
+        <div class="contact-links">
+          <a href="https://github.com/Samiullah-2004" class="contact-link" target="_blank" rel="noopener noreferrer">
+            <span class="contact-link__label">Codebase</span>
+            <span class="contact-link__value">GitHub Profile</span>
+          </a>
+          <a href="https://www.linkedin.com/in/samiullah-akram-a28461404/" class="contact-link" target="_blank" rel="noopener noreferrer">
+            <span class="contact-link__label">Professional</span>
+            <span class="contact-link__value">LinkedIn Network</span>
+          </a>
+          <a href="https://www.upwork.com/freelancers/~01ffa5cf678d8eff63" class="contact-link" target="_blank" rel="noopener noreferrer">
+            <span class="contact-link__label">Freelance</span>
+            <span class="contact-link__value">Upwork Profile</span>
+          </a>
+        </div>
+      </div>
+    </section></main>
+
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p class="footer-copy">
+        &copy; 2026 Samiullah Akram. All rights reserved.
+      </p>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="https://github.com/Samiullah-2004" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub</a>
+        <a href="https://www.linkedin.com/in/samiullah-akram-a28461404/" target="_blank" rel="noopener noreferrer" class="footer-link">LinkedIn</a>
+        <a href="https://samiullah-portfolio-orpin.vercel.app/" target="_blank" rel="noopener noreferrer" class="footer-link">Main Portfolio</a>
+      </nav>
+    </div>
+  </footer>
+
+<script src="script.js"></script>
+</body>
+</html>
